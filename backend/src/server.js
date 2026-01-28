@@ -8,7 +8,11 @@ const app = express();
 const __dirname = path.resolve();
 app.use(clerkMiddleware()); // adds auth object under the req => req.auth
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ message: 'Hello World!', auth: req.auth });
+  const response = { message: 'Hello World!' };
+  if (ENV.NODE_ENV !== 'production') {
+    response.auth = req.auth;
+  }
+  res.status(200).json(response);
 });
 
 //make our app ready for deployment
@@ -26,4 +30,7 @@ const startServer = async () => {
   });
 };
 
-startServer();
+startServer().catch((err) => {
+  console.error('Failed to start server:', err);
+  process.exit(1);
+});
