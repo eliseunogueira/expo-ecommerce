@@ -5,5 +5,5 @@
   "search.exclude": {
     "**/node_modules": true
   },
-  "cSpell.words": ["INNGEST"]
+  "cSpell.words": ["cloudinary", "ecommerce", "inngest", "INNGEST"]
 }
